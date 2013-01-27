@@ -46,8 +46,8 @@ describe 'rails_app::web' do
     end # runner.node['rails_app']['stages'].each
   end # it 'should create multiple symlinks'
   
-  it 'should include recipe logrotate_d::var_www_apps' do
-    chef_run.should include_recipe 'logrotate_d::var_www_apps'
-  end # it 'should include recipe logrotate_d::var_www_apps'
+  it 'should include recipe logrotate_::var_www_apps' do
+    chef_run.should include_recipe 'logrotate_::var_www_apps'
+  end # it 'should include recipe logrotate_::var_www_apps'
   
 end # describe 'rails_app::web'

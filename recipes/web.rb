@@ -75,7 +75,7 @@ node['rails_app']['stages'].each do |stage|
     to    '/tmp'
     owner 'jeeves'
     group 'jeeves'
-    only_if { "test -L #{base}/current" }
+    not_if { ::File.symlink?("#{base}/current") }
   end # link
   
   file "#{base}/current/REVISION" do

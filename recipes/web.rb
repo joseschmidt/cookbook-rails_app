@@ -130,6 +130,7 @@ template '/home/jeeves/.ssh/config' do |t|
 end # template
 
 template '/home/jeeves/.ssh/matrix_deploy_key' do |t|
+  source  'ssh_key.erb'
   owner   'jeeves'
   group   'jeeves'
   mode    '0600'
@@ -138,4 +139,30 @@ template '/home/jeeves/.ssh/matrix_deploy_key' do |t|
       gsub('@hostname', node['hostname']),
     :private_key => secret['matrix_deploy_key']
   )
+end # template
+
+template '/home/jeeves/.ssh/remote_deploy_key' do |t|
+  source  'ssh_key.erb'
+  owner   'jeeves'
+  group   'jeeves'
+  mode    '0600'
+  variables(
+    :header => node['file']['header'].gsub('@filename', t.name).
+      gsub('@hostname', node['hostname']),
+    :private_key => secret['remote_deploy_key']
+  )
+  only_if { secret['remote_deploy_key'] }
+end # template
+
+template '/etc/cron.hourly/remote-deploy' do |t|
+  owner   'root'
+  group   'root'
+  mode    '0755'
+  variables(
+    :header => node['file']['header'].gsub('@filename', t.name).
+      gsub('@hostname', node['hostname']),
+    :mapping => node['rails_app']['deploy']['nodes'][node.name]
+  )
+  action  :create
+  only_if { node['rails_app']['deploy']['nodes'][node.name] }
 end # template

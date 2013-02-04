@@ -5,3 +5,7 @@ host github.com
   user git
   hostname github.com
   identityfile ~/.ssh/matrix_deploy_key
+host <%= node['rails_app']['deploy']['remote_login'].split('@').last %>
+  user <%= node['rails_app']['deploy']['remote_login'].split('@').first %>
+  hostname <%= node['rails_app']['deploy']['remote_login'].split('@').last %>
+  identityfile ~/.ssh/remote_deploy_key

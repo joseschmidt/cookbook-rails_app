@@ -127,6 +127,18 @@ mysql_database_user 'wwuser' do
 end # mysql_database_user
 
 
+# grant privileges to 'insql' for internal, read/write access to The Matrix
+mysql_database_user 'insql' do
+  connection    connection_info
+  password      secret['insql']
+  database_name 'matrix_production'
+  host          '%'
+  privileges    ['SELECT', 'UPDATE']
+  action        :grant
+  only_if { secret['insql'] }
+end # mysql_database_user
+
+
 # drop test database
 mysql_database 'test' do
   connection  connection_info

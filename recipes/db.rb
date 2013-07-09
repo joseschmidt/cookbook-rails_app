@@ -64,7 +64,7 @@ connection_info = {
   # grant privileges to 'insql' for internal, read/write access to The Matrix
   mysql_database_user 'insql' do
     connection    connection_info
-    password      secret['insql']
+    password      secret['insql'] || :missing_password
     host          domain
     database_name 'matrix_production'
     privileges    ['SELECT', 'INSERT', 'UPDATE']

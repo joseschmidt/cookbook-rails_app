@@ -59,6 +59,18 @@ connection_info = {
     action :grant
     only_if { secret['mysqladmin'] }
   end # mysql_database_user 'mysqladmin'
+  
+  
+  # grant privileges to 'insql' for internal, read/write access to The Matrix
+  mysql_database_user 'insql' do
+    connection    connection_info
+    password      secret['insql']
+    host          domain
+    database_name 'matrix_production'
+    privileges    ['SELECT', 'INSERT', 'UPDATE']
+    action        :grant
+    only_if { secret['insql'] }
+  end # mysql_database_user
 end # %w(localhost %).each
 
 
@@ -124,18 +136,6 @@ mysql_database_user 'wwuser' do
   privileges    ['SELECT']
   action        :grant
   only_if { secret['wwuser'] }
-end # mysql_database_user
-
-
-# grant privileges to 'insql' for internal, read/write access to The Matrix
-mysql_database_user 'insql' do
-  connection    connection_info
-  password      secret['insql']
-  database_name 'matrix_production'
-  host          '%'
-  privileges    ['SELECT', 'UPDATE']
-  action        :grant
-  only_if { secret['insql'] }
 end # mysql_database_user
 
 

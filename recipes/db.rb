@@ -50,7 +50,7 @@ connection_info = {
   # end
   mysql_database_user 'mysqladmin' do
     connection connection_info
-    password secret['mysqladmin']
+    password secret['mysqladmin'] || 'missing_password'
     host domain
     with_option ['GRANT OPTION']
     # with_option ['GRANT OPTION', 'MAX_QUERIES_PER_HOUR 60',
@@ -86,7 +86,7 @@ node['rails_app']['stages'].each do |stage|
   # grant privileges to <db_username> for Rails <stage> environment
   mysql_database_user stage.fetch('db_username') do
     connection    connection_info
-    password      secret[stage.fetch('db_username')]
+    password      secret[stage.fetch('db_username')] || 'missing_password'
     database_name stage.fetch('db_database')
     host          stage.fetch('db_host')
     action        :grant
@@ -130,7 +130,7 @@ end # node['rails_app']['stages'].each
 # grant privileges to 'wwuser' for internal, read-only access to The Matrix
 mysql_database_user 'wwuser' do
   connection    connection_info
-  password      secret['wwuser']
+  password      secret['wwuser'] || 'missing_password'
   database_name 'matrix_production'
   host          '%'
   privileges    ['SELECT']

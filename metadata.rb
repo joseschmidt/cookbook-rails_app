@@ -1,5 +1,5 @@
 name              'rails_app'
-version           '0.3.4'
+version           '0.3.5'
 
 depends           'cron'
 depends           'database'

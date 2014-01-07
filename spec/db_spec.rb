@@ -35,7 +35,7 @@ describe 'rails_app::db' do
 
   it 'should include recipe mysql::ruby' do
     chef_run.should include_recipe 'mysql::ruby'
-  end # it 'should include recipe mysql::ruby'
+  end # it
 
   it 'should include recipe chef-sugar' do
     expect(chef_run).to include_recipe('chef-sugar')
@@ -44,29 +44,29 @@ describe 'rails_app::db' do
   %w(localhost %).each do |domain|
     it "should create user mysqladmin@#{domain}" do
       pending "should create user mysqladmin@#{domain}"
-    end # it "should create user mysqladmin@#{domain}"
-  end # %w(localhost %).each
-  
+    end # it
+  end # .each
+
   %w(matrix_production matrix_staging).each do |database|
     it "should create database #{database}" do
       pending "should create database #{database}"
-    end # it "should create database #{database}"
-  end # %w(matrix_production matrix_staging).each
-  
+    end # it
+  end # .each
+
   it 'should grant privileges to user matrix' do
     pending 'should grant privileges to user matrix'
-  end # it 'should grant privileges to user matrix'
-  
+  end # it
+
   it 'should grant privileges to user matrix_staging' do
     pending 'should grant privileges to user matrix_staging'
-  end # it 'should grant privileges to user matrix_staging'
-  
+  end # it
+
   it 'should grant privileges to user wwuser' do
     pending 'should grant privileges to user wwuser'
-  end # it 'should grant privileges to user wwuser'
-  
+  end # it
+
   it 'should drop database test' do
     pending 'should drop database test'
-  end # it 'should drop database test'
-  
-end # describe 'rails_app::db'
+  end # it
+
+end # describe

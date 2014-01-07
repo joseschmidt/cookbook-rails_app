@@ -51,22 +51,22 @@ describe 'rails_app::web' do
     dir = '/var/www/html'
     expect(chef_run).to create_directory(dir)
       .with(:owner => 'root', :group => 'root')
-  end # it 'should create directory /var/www/html'
-  
+  end # it
+
   it 'should create user jeeves' do
     chef_run.should create_user 'jeeves'
-  end # it 'should create user jeeves'
+  end # it
 
   it 'should create multiple symlinks' do
     node['rails_app']['stages'].each do |item|
      link = "/var/www/html/#{item['codename']}"
       expect(chef_run).to create_link(link)
         .with(:owner => 'root', :group => 'root')
-    end # node['rails_app']['stages'].each
-  end # it 'should create multiple symlinks'
-  
+    end # .each
+  end # it
+
   it 'should include recipe logrotate_::var_www_apps' do
     chef_run.should include_recipe 'logrotate'
-  end # it 'should include recipe logrotate_::var_www_apps'
-  
-end # describe 'rails_app::web'
+  end # it
+
+end # describe

@@ -20,10 +20,10 @@
 #
 
 include_recipe 'mysql::ruby'
-include_recipe 'helpers'
+include_recipe 'chef-sugar'
 
 # retrieve contents of encrypted data bag (refer to chef-repo/ENCRYPTED.md)
-secret = decrypt_data_bag(:encrypted)
+secret = encrypted_data_bag_item(:encrypted, node.chef_environment)
 
 # establish database server connection parameters
 connection_info = {

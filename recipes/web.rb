@@ -19,10 +19,10 @@
 # limitations under the License.
 #
 
-include_recipe 'helpers'
+include_recipe 'chef-sugar'
 
 # retrieve contents of encrypted data bag (refer to chef-repo/ENCRYPTED.md)
-secret = decrypt_data_bag(:encrypted)
+secret = encrypted_data_bag_item(:encrypted, node.chef_environment)
 
 #-------------------------------------------------------- install dependencies
 node['rails_app']['packages'].each do |pkg|

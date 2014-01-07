@@ -33,40 +33,40 @@ describe 'rails_app::db' do
     end.converge(described_recipe)
   end # let
 
-  it 'should include recipe mysql::ruby' do
-    chef_run.should include_recipe 'mysql::ruby'
+  it 'includes recipe mysql::ruby' do
+    expect(chef_run).to include_recipe('mysql::ruby')
   end # it
 
-  it 'should include recipe chef-sugar' do
+  it 'includes recipe chef-sugar' do
     expect(chef_run).to include_recipe('chef-sugar')
   end # it
 
   %w(localhost %).each do |domain|
-    it "should create user mysqladmin@#{domain}" do
-      pending "should create user mysqladmin@#{domain}"
+    it "creates user mysqladmin@#{domain}" do
+      pending "creates user mysqladmin@#{domain}"
     end # it
   end # .each
 
   %w(matrix_production matrix_staging).each do |database|
-    it "should create database #{database}" do
-      pending "should create database #{database}"
+    it "creates database #{database}" do
+      pending "creates database #{database}"
     end # it
   end # .each
 
-  it 'should grant privileges to user matrix' do
-    pending 'should grant privileges to user matrix'
+  it 'grants privileges to user matrix' do
+    pending 'grants privileges to user matrix'
   end # it
 
-  it 'should grant privileges to user matrix_staging' do
-    pending 'should grant privileges to user matrix_staging'
+  it 'grants privileges to user matrix_staging' do
+    pending 'grants privileges to user matrix_staging'
   end # it
 
-  it 'should grant privileges to user wwuser' do
-    pending 'should grant privileges to user wwuser'
+  it 'grants privileges to user wwuser' do
+    pending 'grants privileges to user wwuser'
   end # it
 
-  it 'should drop database test' do
-    pending 'should drop database test'
+  it 'drops database test' do
+    pending 'drops database test'
   end # it
 
 end # describe

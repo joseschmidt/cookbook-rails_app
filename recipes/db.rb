@@ -20,10 +20,10 @@
 #
 
 include_recipe 'mysql::ruby'
-include_recipe 'helpers'
+include_recipe 'chef-sugar'
 
 # retrieve contents of encrypted data bag (refer to chef-repo/ENCRYPTED.md)
-secret = decrypt_data_bag(:encrypted)
+secret = encrypted_data_bag_item(:encrypted, node.chef_environment)
 
 # establish database server connection parameters
 connection_info = {
@@ -58,9 +58,9 @@ connection_info = {
     #   'MAX_USER_CONNECTIONS 5']
     action :grant
     only_if { secret['mysqladmin'] }
-  end # mysql_database_user 'mysqladmin'
-  
-  
+  end # mysql_database_user
+
+
   # grant privileges to 'insql' for internal, read/write access to The Matrix
   mysql_database_user 'insql' do
     connection    connection_info
@@ -71,7 +71,7 @@ connection_info = {
     action        :grant
     only_if { secret['insql'] }
   end # mysql_database_user
-end # %w(localhost %).each
+end # .each
 
 
 # use fetch method to fail if key is missing
@@ -93,8 +93,8 @@ node['rails_app']['stages'].each do |stage|
     action        :grant
     only_if { secret[stage.fetch('db_username')] }
   end # mysql_database_user
-  
-end # node['rails_app']['stages'].each
+
+end # .each
 
 # # create production, staging databases
 # %w(matrix_production matrix_staging).each do |database|
@@ -103,7 +103,7 @@ end # node['rails_app']['stages'].each
 #     encoding 'utf8'
 #     collation 'utf8_general_ci'
 #   end # mysql_database database
-# end # %w(matrix_production matrix_staging).each
+# end # .each
 
 
 # # grant privileges to 'matrix' for Rails production environment
@@ -114,7 +114,7 @@ end # node['rails_app']['stages'].each
 #   host 'localhost'
 #   action :grant
 #   only_if { secret['matrix'] }
-# end # mysql_database_user 'matrix'
+# end # mysql_database_user
 
 
 # # grant privileges to 'matrix_staging' for Rails staging environment
@@ -125,7 +125,7 @@ end # node['rails_app']['stages'].each
 #   host 'localhost'
 #   action :grant
 #   only_if { secret['matrix_staging'] }
-# end # mysql_database_user 'matrix_staging'
+# end # mysql_database_user
 
 
 # grant privileges to 'wwuser' for internal, read-only access to The Matrix

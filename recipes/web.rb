@@ -19,15 +19,15 @@
 # limitations under the License.
 #
 
-include_recipe 'helpers'
+include_recipe 'chef-sugar'
 
 # retrieve contents of encrypted data bag (refer to chef-repo/ENCRYPTED.md)
-secret = decrypt_data_bag(:encrypted)
+secret = encrypted_data_bag_item(:encrypted, node.chef_environment)
 
 #-------------------------------------------------------- install dependencies
 node['rails_app']['packages'].each do |pkg|
   package pkg
-end # node['rails_app']['packages'].each
+end # .each
 
 # nodejs requires python 2.6; the symlink below allows #!/usr/bin/env python
 # to use v2.6, provided /usr/local/bin comes before /usr/bin in $PATH
@@ -99,8 +99,8 @@ node['rails_app']['stages'].each do |stage|
       :db_password  => secret[stage['db_username']]
     )
   end # template
-  
-end # node['rails_app']['stages'].each
+
+end # .each
 
 # adjust permissions on /var/www/html/<app>
 execute "chown -R jeeves:jeeves /var/www/apps/#{node['rails_app']['name']}"

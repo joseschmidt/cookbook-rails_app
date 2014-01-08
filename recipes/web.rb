@@ -125,8 +125,8 @@ template '/home/jeeves/.ssh/config' do |t|
   group   'jeeves'
   mode    '0644'
   variables(
-    :header => node['file']['header'].gsub('@filename', t.name).
-      gsub('@hostname', node['hostname'])
+    :header => node['file']['header'].gsub('@filename', t.name)
+      .gsub('@hostname', node['hostname'])
   )
 end # template
 
@@ -136,8 +136,8 @@ template '/home/jeeves/.ssh/matrix_deploy_key' do |t|
   group   'jeeves'
   mode    '0600'
   variables(
-    :header => node['file']['header'].gsub('@filename', t.name).
-      gsub('@hostname', node['hostname']),
+    :header => node['file']['header'].gsub('@filename', t.name)
+      .gsub('@hostname', node['hostname']),
     :private_key => secret['matrix_deploy_key']
   )
 end # template

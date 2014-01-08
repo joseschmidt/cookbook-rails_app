@@ -68,7 +68,7 @@ connection_info = {
     password      secret['insql'] || 'missing_password'
     host          domain
     database_name 'matrix_production'
-    privileges    ['SELECT', 'INSERT', 'UPDATE']
+    privileges    %w{ SELECT INSERT UPDATE }
     action        :grant
     only_if { secret['insql'] }
   end # mysql_database_user

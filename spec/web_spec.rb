@@ -60,7 +60,7 @@ describe 'rails_app::web' do
 
   it 'creates multiple symlinks' do
     node['rails_app']['stages'].each do |item|
-     link = "/var/www/html/#{item['codename']}"
+      link = "/var/www/html/#{item['codename']}"
       expect(chef_run).to create_link(link)
         .with(:owner => 'root', :group => 'root')
     end # .each

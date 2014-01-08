@@ -1,3 +1,4 @@
+# coding: utf-8
 #
 # Cookbook Name:: rails_app
 # Recipe:: db
@@ -39,7 +40,7 @@ connection_info = {
   # mysql_database 'custom query' do
   #   connection connection_info
   #   sql <<-EOF
-  #   GRANT ALL PRIVILEGES 
+  #   GRANT ALL PRIVILEGES
   #   ON *.*
   #   TO `mysqladmin`@`#{domain}`
   #   IDENTIFIED BY PASSWORD '#{secret["mysqladmin"]}'
@@ -67,7 +68,7 @@ connection_info = {
     password      secret['insql'] || 'missing_password'
     host          domain
     database_name 'matrix_production'
-    privileges    ['SELECT', 'INSERT', 'UPDATE']
+    privileges    %w{ SELECT INSERT UPDATE }
     action        :grant
     only_if { secret['insql'] }
   end # mysql_database_user
@@ -82,7 +83,7 @@ node['rails_app']['stages'].each do |stage|
     encoding    stage.fetch('db_encoding')
     collation   stage.fetch('db_collation')
   end # mysql_database
-  
+
   # grant privileges to <db_username> for Rails <stage> environment
   mysql_database_user "#{stage}_#{stage.fetch('db_username')}" do
     name          stage.fetch('db_username')

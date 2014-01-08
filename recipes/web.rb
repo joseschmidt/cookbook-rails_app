@@ -54,7 +54,7 @@ directory '/var/www/html' do
 end # directory
 
 node['rails_app']['stages'].each do |stage|
-  
+
   # ln -s ../apps/<app>/<stage>/current/public /var/www/html/<codename>
   link "/var/www/html/#{stage['codename']}" do
     to    "../apps/#{node['rails_app']['name']}/#{stage['name']}/" +
@@ -62,7 +62,7 @@ node['rails_app']['stages'].each do |stage|
     owner 'root'
     group 'root'
   end # link
-  
+
   base = "/var/www/apps/#{node['rails_app']['name']}/#{stage['name']}"
   # create /var/www/apps/<app>/<stage>/shared/config directory
   directory "#{base}/shared/config" do
@@ -71,7 +71,7 @@ node['rails_app']['stages'].each do |stage|
     mode      '0755'
     recursive true
   end # directory
-  
+
   # ln -s /tmp /var/www/apps/<app>/<stage>/current
   link "#{base}/current" do
     to    '/tmp'
@@ -79,14 +79,14 @@ node['rails_app']['stages'].each do |stage|
     group 'jeeves'
     not_if { ::File.symlink?("#{base}/current") }
   end # link
-  
+
   file "#{base}/current/REVISION" do
     owner   'jeeves'
     group   'jeeves'
     mode    '0755'
     action  :create_if_missing
   end # file
-  
+
   # create rails database configuration file
   template 'database.yml' do |t|
     path      "#{base}/shared/config/database.yml"

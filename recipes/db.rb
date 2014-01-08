@@ -40,7 +40,7 @@ connection_info = {
   # mysql_database 'custom query' do
   #   connection connection_info
   #   sql <<-EOF
-  #   GRANT ALL PRIVILEGES 
+  #   GRANT ALL PRIVILEGES
   #   ON *.*
   #   TO `mysqladmin`@`#{domain}`
   #   IDENTIFIED BY PASSWORD '#{secret["mysqladmin"]}'
@@ -83,7 +83,7 @@ node['rails_app']['stages'].each do |stage|
     encoding    stage.fetch('db_encoding')
     collation   stage.fetch('db_collation')
   end # mysql_database
-  
+
   # grant privileges to <db_username> for Rails <stage> environment
   mysql_database_user "#{stage}_#{stage.fetch('db_username')}" do
     name          stage.fetch('db_username')

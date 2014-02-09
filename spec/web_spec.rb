@@ -70,4 +70,23 @@ describe 'rails_app::web' do
     expect(chef_run).to include_recipe('logrotate')
   end # it
 
+  context '/home/jeeves/.ssh' do
+    it 'creates directory' do
+      expect(chef_run).to create_directory(subject)
+        .with(:owner => 'jeeves', :group => 'jeeves', :mode => '0700')
+    end # it
+  end # context
+
+  context '/home/jeeves/.ssh/config' do
+    it 'creates template' do
+      expect(chef_run).to create_template(subject)
+        .with(:owner => 'jeeves', :group => 'jeeves', :mode => '0644')
+    end # it
+
+    it 'contains expected content' do
+      expect(chef_run).to render_file(subject)
+        .with_content('node.file.header')
+    end # it
+  end # context
+
 end # describe

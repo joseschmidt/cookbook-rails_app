@@ -121,6 +121,12 @@ logrotate_app 'var_www_apps' do
 end # logrotate_app
 
 #----------------------------------------------------- configure github access
+directory '/home/jeeves/.ssh' do
+  owner   'jeeves'
+  group   'jeeves'
+  mode    '0700'
+end # directory
+
 template '/home/jeeves/.ssh/config' do |t|
   owner   'jeeves'
   group   'jeeves'

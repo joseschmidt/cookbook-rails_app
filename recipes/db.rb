@@ -86,10 +86,10 @@ node['rails_app']['stages'].each do |stage|
 
   # grant privileges to <db_username> for Rails <stage> environment
   mysql_database_user "#{stage}_#{stage.fetch('db_username')}" do
-    name          stage.fetch('db_username')
     connection    connection_info
     password      secret[stage.fetch('db_username')] || 'missing_password'
     database_name stage.fetch('db_database')
+    username      stage.fetch('db_username')
     host          stage.fetch('db_host')
     action        :grant
     only_if { secret[stage.fetch('db_username')] }

@@ -5,14 +5,6 @@
 #
 
 default['rails_app']['name']                  = 'matrix'
-
-# gem ruby-odbc-0.99994 requires unixODBC-devel
-#     tiny_tds-0.5.1    requires freetds, freetds-devel
-# nodejs requires python26
-default['rails_app']['packages'] = %w(
-  unixODBC-devel freetds freetds-devel python26
-)
-
 default['rails_app']['rails']['version']      = '3.2.11'
 default['rails_app']['stages'] = [
   {

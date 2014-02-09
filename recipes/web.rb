@@ -21,14 +21,27 @@
 #
 
 include_recipe 'chef-sugar'
+include_recipe 'yum::epel'
 
 # retrieve contents of encrypted data bag (refer to chef-repo/ENCRYPTED.md)
 secret = encrypted_data_bag_item(:encrypted, node.chef_environment)
 
 #-------------------------------------------------------- install dependencies
-node['rails_app']['packages'].each do |pkg|
+Chef::Config[:yum_timeout] = 1800
+# gem ruby-odbc-0.99994 requires unixODBC-devel
+package 'unixODBC-devel'
+
+# gem tiny_tds-0.5.1 requires freetds, freetds-devel
+%w(freetds freetds-devel).each do |pkg|
   package pkg
 end # .each
+
+# python 2.6 is required; CentOS 5.x needs to use python26 package
+if platform_family?('rhel') && node['platform_version'].to_f < 6.0
+  package 'python26'
+else
+  package 'python'
+end # if
 
 # nodejs requires python 2.6; the symlink below allows #!/usr/bin/env python
 # to use v2.6, provided /usr/local/bin comes before /usr/bin in $PATH
@@ -38,7 +51,7 @@ link '/usr/local/bin/python' do
   owner 'root'
   group 'root'
   action :create
-  subscribes :create, resources('package[python26]'), :immediately
+  only_if { platform_family?('rhel') && node['platform_version'].to_f < 6.0 }
 end # link
 
 #------------------ create user, directories, symlinks, database configuration

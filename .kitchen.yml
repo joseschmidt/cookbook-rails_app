@@ -1,0 +1,35 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+  client_rb:
+    environment: qa
+  data_bags_path: test/integration/data_bags
+  encrypted_data_bag_secret_key_path: test/integration/encrypted_data_bag_secret
+  environments_path: test/integration/environments
+
+platforms:
+  # locally-provisioned opscode-centos-5.10 box with omnibus chef 11.8.2
+  - name: centos-5.10-chef-11.8.2
+    driver:
+      box: opscode-centos-5.10-chef-11.8.2
+    run_list:
+      - 'recipe[mysql::server]'   # need to install mysql-server first
+
+  # locally-provisioned opscode-centos-6.5 box with omnibus chef 11.8.2
+  - name: centos-6.5-chef-11.8.2
+    driver:
+      box: opscode-centos-6.5-chef-11.8.2
+    run_list:
+      - 'recipe[mysql::server]'   # need to install mysql-server first
+
+suites:
+  - name: rails_app
+    run_list:
+      - 'recipe[rails_app::db]'
+      - 'recipe[rails_app::web]'
+    attributes:
+      file:
+        header: '# fake'

@@ -1,0 +1,45 @@
+{
+  "id": "qa",
+  "insql": {
+    "encrypted_data": "ruPqPJtERSsvxIeiBBBYq4Gg8FkLcLNHsxxcSHh0sOyDRhWF0yHy3hVAQPVc\nMmOc\n",
+    "iv": "H/JtYS+bpTXMc/Nt2XljzQ==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "matrix": {
+    "encrypted_data": "vYmnZxvE008c2hz/vSwsNTBjrRq4DqAo55rlMd0qKgpWsKBFJ7YdmPD8UUwd\nHLmr\n",
+    "iv": "NWsZ6KTOm/tBIMcZXgQZoA==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "matrix_deploy_key": {
+    "encrypted_data": "KQ6zqo1UJZ0ikgINIbVTEg6ZFAHW7cdY2K4XaolZ0wo=\n",
+    "iv": "shRDTTX6xIUe0oqD/JWbDg==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "matrix_staging": {
+    "encrypted_data": "uk1LCq4U9HY8kt3xppNrAWL06F91iGC6gQu1CKDYPs/Xwa7cODM7KBTeAt3E\nY33m\n",
+    "iv": "Yu2oc9mPxKRHhptMdRNoVQ==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "mysql": {
+    "encrypted_data": "KGK2ofdiV7E0ndZvSkfkCNcYNOLE6G5jrhI211tA5gIIixaI3Whhfq2wmeey\n/mmd\n",
+    "iv": "ObpdG8N2Zhl4xgXfMIMlCg==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "mysqladmin": {
+    "encrypted_data": "eXc0Q/58CzsYBXS7SaWWl57wemvJDALELXWDHBcwEYCiQAAqPzAUJCNhrpOD\n6QA3\n",
+    "iv": "sJfPc0HpX+4XE3+Fu74SAw==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  },
+  "wwuser": {
+    "encrypted_data": "Fyt+ux/3SlG2Fqyiji7EScqh70o4KKaTZB38mmBhhOzjWYM9rMXYG7DHOrAn\n7Fdb\n",
+    "iv": "oy3bVsZTDogj+OR9Ok3fBA==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}

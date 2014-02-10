@@ -27,7 +27,7 @@ include_recipe 'yum::epel' if platform_family?('rhel')
 secret = encrypted_data_bag_item(:encrypted, node.chef_environment)
 
 #-------------------------------------------------------- install dependencies
-Chef::Config[:yum_timeout] = 1800
+Chef::Config['yum_timeout'] = 1800
 # gem ruby-odbc-0.99994 requires unixODBC-devel
 package 'unixODBC-devel'
 

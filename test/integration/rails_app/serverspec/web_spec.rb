@@ -1,4 +1,5 @@
 # coding: utf-8
+require 'spec_helper'
 
 describe 'rails_app::web' do
   describe yumrepo('epel') do

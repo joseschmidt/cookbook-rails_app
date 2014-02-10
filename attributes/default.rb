@@ -30,23 +30,3 @@ default['rails_app']['stages'] = [
     'db_host'                 => 'localhost'
   }
 ]
-
-default['rails_app']['deploy']['remote_bind_address'] = '10.201.0.1'
-default['rails_app']['deploy']['remote_login'] = 'pigorfish@wvfans.net'
-default['rails_app']['deploy']['nodes'] = {
-  'phimatrix' => { 22 => 10_201, 80 => 10_801 },
-  'rshmatrix' => { 22 => 10_202, 80 => 10_802 },
-  'cpkmatrix' => { 22 => 10_203, 80 => 10_803 },
-  'nzlmatrix' => { 22 => 10_204, 80 => 10_804 },
-  'tapmatrix' => { 22 => 10_211, 80 => 10_811 },
-  'renmatrix' => { 22 => 10_212, 80 => 10_812 },
-  'fnpmatrix' => { 22 => 10_213, 80 => 10_813 },
-  'clpmatrix' => { 22 => 10_214, 80 => 10_814 },
-  'waxmatrix' => { 22 => 10_215, 80 => 10_815 },
-  'pepmatrix' => { 22 => 10_216, 80 => 10_816 },
-  'pcpmatrix' => { 22 => 10_217, 80 => 10_817 },
-  'vapmatrix' => { 22 => 10_218, 80 => 10_818 },
-  'matrix'    => { 22 => 10_221, 80 => 10_821 },
-  'devmatrix' => { 22 => 10_222, 80 => 10_822 },
-  'jhx_client' => { 22 => 10_223, 80 => 10_823 }
-}

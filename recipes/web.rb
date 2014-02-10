@@ -21,7 +21,7 @@
 #
 
 include_recipe 'chef-sugar'
-include_recipe 'yum::epel'
+include_recipe 'yum::epel' if platform_family?('rhel')
 
 # retrieve contents of encrypted data bag (refer to chef-repo/ENCRYPTED.md)
 secret = encrypted_data_bag_item(:encrypted, node.chef_environment)

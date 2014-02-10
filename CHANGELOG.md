@@ -1,9 +1,12 @@
 CHANGELOG
 =========
 
-TBD
+0.4.0 / 2014-02-09
 ------------------
 
+- `NEW` add emeril gem to publish cookbook | [#40][]
+- `FIX` add missing require 'spec_helper' | [#39][]
+- `NEW` add [CHANGELOG](CHANGELOG.md) | [#37][]
 - `IMPROVE` update [README](README.md) | [#35][] [#36][]
 - `IMPROVE` remove deprecated functionality | [#34][]
 - `NEW` add [TESTING](TESTING.md) | [#32][]
@@ -98,3 +101,6 @@ Legend
 [#34]: https://github.com/jhx/cookbook-rails_app/issues/34
 [#35]: https://github.com/jhx/cookbook-rails_app/issues/35
 [#36]: https://github.com/jhx/cookbook-rails_app/issues/36
+[#37]: https://github.com/jhx/cookbook-rails_app/issues/37
+[#39]: https://github.com/jhx/cookbook-rails_app/issues/39
+[#40]: https://github.com/jhx/cookbook-rails_app/issues/40

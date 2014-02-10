@@ -1,6 +1,6 @@
 # coding: utf-8
 name              'rails_app'
-version           '0.3.5'
+version           '0.4.0'
 
 depends           'chef-sugar', '~> 1.1.0'
 depends           'cron', '~> 1.2.2'

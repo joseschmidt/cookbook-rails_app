@@ -161,11 +161,3 @@ template '/home/jeeves/.ssh/matrix_deploy_key' do |t|
     :private_key => secret['matrix_deploy_key']
   )
 end # template
-
-file '/home/jeeves/.ssh/remote_deploy_key' do |f|
-  action :delete
-end # file
-
-file '/etc/cron.hourly/remote-deploy' do |f|
-  action :delete
-end # file

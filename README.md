@@ -1,5 +1,5 @@
-rails_app_ Cookbook
-===================
+rails_app Cookbook
+==================
 [![Build Status](https://travis-ci.org/jhx/cookbook-rails_app.png?branch=master)](https://travis-ci.org/jhx/cookbook-rails_app)
 
 Installs support packages and symlinks for the Rails app.

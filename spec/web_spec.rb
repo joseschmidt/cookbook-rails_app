@@ -22,24 +22,20 @@ describe 'rails_app::web' do
       Chef::Environment.stub(:load).and_return(env)
 
       # override cookbook attributes
-      node.set['file'] = {
-        'header' => 'node.file.header'
-      }
-      node.set['rails_app'] = {
-        'name' => 'whiz_bang_app',
-        'stages' => [
-          {
-            'name'                    => 'stage1',
-            'codename'                => 'st1',
-            'db_username'             => 'stage1_db_user'
-          },
-          {
-            'name'                    => 'stage2',
-            'codename'                => 'st2',
-            'db_username'             => 'stage2_db_user'
-          }
-        ]
-      }
+      node.set['file']['header'] = 'node.file.header'
+      node.set['rails_app']['name'] = 'whiz_bang_app'
+      node.set['rails_app']['stages'] = [
+        {
+          'name'                    => 'stage1',
+          'codename'                => 'st1',
+          'db_username'             => 'stage1_db_user'
+        },
+        {
+          'name'                    => 'stage2',
+          'codename'                => 'st2',
+          'db_username'             => 'stage2_db_user'
+        }
+      ]
 
       # required for build-essential cookbook on travis-ci
       node.set['platform_family'] = 'rhel'

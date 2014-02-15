@@ -22,24 +22,20 @@ describe 'rails_app::web' do
       Chef::Environment.stub(:load).and_return(env)
 
       # override cookbook attributes
-      node.set['file'] = {
-        'header' => 'node.file.header'
-      }
-      node.set['rails_app'] = {
-        'name' => 'whiz_bang_app',
-        'stages' => [
-          {
-            'name'                    => 'stage1',
-            'codename'                => 'st1',
-            'db_username'             => 'stage1_db_user'
-          },
-          {
-            'name'                    => 'stage2',
-            'codename'                => 'st2',
-            'db_username'             => 'stage2_db_user'
-          }
-        ]
-      }
+      node.set['file']['header'] = 'node.file.header'
+      node.set['rails_app']['name'] = 'whiz_bang_app'
+      node.set['rails_app']['stages'] = [
+        {
+          'name'                    => 'stage1',
+          'codename'                => 'st1',
+          'db_username'             => 'stage1_db_user'
+        },
+        {
+          'name'                    => 'stage2',
+          'codename'                => 'st2',
+          'db_username'             => 'stage2_db_user'
+        }
+      ]
 
       # required for build-essential cookbook on travis-ci
       node.set['platform_family'] = 'rhel'
@@ -70,14 +66,14 @@ describe 'rails_app::web' do
     expect(chef_run).to include_recipe('logrotate')
   end # it
 
-  context '/home/jeeves/.ssh' do
+  describe '/home/jeeves/.ssh' do
     it 'creates directory' do
       expect(chef_run).to create_directory(subject)
         .with(:owner => 'jeeves', :group => 'jeeves', :mode => '0700')
     end # it
-  end # context
+  end # describe
 
-  context '/home/jeeves/.ssh/config' do
+  describe '/home/jeeves/.ssh/config' do
     it 'creates template' do
       expect(chef_run).to create_template(subject)
         .with(:owner => 'jeeves', :group => 'jeeves', :mode => '0644')
@@ -87,6 +83,6 @@ describe 'rails_app::web' do
       expect(chef_run).to render_file(subject)
         .with_content('node.file.header')
     end # it
-  end # context
+  end # describe
 
 end # describe

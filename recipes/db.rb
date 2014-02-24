@@ -50,16 +50,16 @@ connection_info = {
   #   only_if { secret['mysqladmin'] }
   # end
   mysql_database_user 'mysqladmin' do
-    connection connection_info
-    username 'mysqladmin'
-    host domain
-    password secret['mysqladmin'] || 'missing_password'
+    connection  connection_info
+    username    'mysqladmin'
+    host        domain
+    password    secret['mysqladmin'] || 'missing_password'
     with_option ['GRANT OPTION']
     # with_option ['GRANT OPTION', 'MAX_QUERIES_PER_HOUR 60',
     #   'MAX_UPDATES_PER_HOUR 75', 'MAX_CONNECTIONS_PER_HOUR 90',
     #   'MAX_USER_CONNECTIONS 5']
-    action :grant
-    only_if { secret['mysqladmin'] }
+    action      :grant
+    only_if     { secret['mysqladmin'] }
   end # mysql_database_user
 
 
@@ -72,7 +72,7 @@ connection_info = {
     database_name 'matrix_production'
     privileges    %w{ SELECT INSERT UPDATE }
     action        :grant
-    only_if { secret['insql'] }
+    only_if       { secret['insql'] }
   end # mysql_database_user
 end # .each
 
@@ -94,7 +94,7 @@ node['rails_app']['stages'].each do |stage|
     password      secret[stage.fetch('db_username')] || 'missing_password'
     database_name stage.fetch('db_database')
     action        :grant
-    only_if { secret[stage.fetch('db_username')] }
+    only_if       { secret[stage.fetch('db_username')] }
   end # mysql_database_user
 
 end # .each
@@ -139,7 +139,7 @@ mysql_database_user 'wwuser' do
   database_name 'matrix_production'
   privileges    ['SELECT']
   action        :grant
-  only_if { secret['wwuser'] }
+  only_if       { secret['wwuser'] }
 end # mysql_database_user
 
 

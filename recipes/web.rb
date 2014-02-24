@@ -37,11 +37,14 @@ package 'unixODBC-devel'
 end # .each
 
 # python 2.6 is required; CentOS 5.x needs to use python26 package
-if platform_family?('rhel') && node['platform_version'].to_f < 6.0
-  package 'python26'
-else
-  package 'python'
-end # if
+package 'python' do
+  if platform_family?('rhel') && node['platform_version'].to_i == 5
+    package_name 'python26'
+  else
+    package_name 'python'
+  end # if
+  action :install
+end # package
 
 # nodejs requires python 2.6; the symlink below allows #!/usr/bin/env python
 # to use v2.6, provided /usr/local/bin comes before /usr/bin in $PATH
@@ -101,7 +104,8 @@ node['rails_app']['stages'].each do |stage|
   end # file
 
   # create rails database configuration file
-  template 'database.yml' do |t|
+  template "#{stage}: database.yml" do |t|
+    source    'database.yml.erb'
     path      "#{base}/shared/config/database.yml"
     owner     'jeeves'
     group     'jeeves'

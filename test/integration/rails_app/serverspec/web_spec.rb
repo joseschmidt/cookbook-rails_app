@@ -314,7 +314,7 @@ describe 'rails_app::web' do
       expect(subject.content).to include('daily')
     end # it
 
-    it 'includes expected rotate period' do
+    it 'includes expected rotate limit' do
       expect(subject.content).to include('rotate 30')
     end # it
 

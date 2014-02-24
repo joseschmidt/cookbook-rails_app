@@ -28,8 +28,8 @@ secret = encrypted_data_bag_item(:encrypted, node.chef_environment)
 
 # establish database server connection parameters
 connection_info = {
-  :host => 'localhost',
   :username => 'root',
+  :host => 'localhost',
   :password => node['mysql']['server_root_password'] ||
     secret['mysql']['root']
 }
@@ -51,8 +51,9 @@ connection_info = {
   # end
   mysql_database_user 'mysqladmin' do
     connection connection_info
-    password secret['mysqladmin'] || 'missing_password'
+    username 'mysqladmin'
     host domain
+    password secret['mysqladmin'] || 'missing_password'
     with_option ['GRANT OPTION']
     # with_option ['GRANT OPTION', 'MAX_QUERIES_PER_HOUR 60',
     #   'MAX_UPDATES_PER_HOUR 75', 'MAX_CONNECTIONS_PER_HOUR 90',
@@ -65,8 +66,9 @@ connection_info = {
   # grant privileges to 'insql' for internal, read/write access to The Matrix
   mysql_database_user 'insql' do
     connection    connection_info
-    password      secret['insql'] || 'missing_password'
+    username      'insql'
     host          domain
+    password      secret['insql'] || 'missing_password'
     database_name 'matrix_production'
     privileges    %w{ SELECT INSERT UPDATE }
     action        :grant
@@ -87,10 +89,10 @@ node['rails_app']['stages'].each do |stage|
   # grant privileges to <db_username> for Rails <stage> environment
   mysql_database_user "#{stage}_#{stage.fetch('db_username')}" do
     connection    connection_info
-    password      secret[stage.fetch('db_username')] || 'missing_password'
-    database_name stage.fetch('db_database')
     username      stage.fetch('db_username')
     host          stage.fetch('db_host')
+    password      secret[stage.fetch('db_username')] || 'missing_password'
+    database_name stage.fetch('db_database')
     action        :grant
     only_if { secret[stage.fetch('db_username')] }
   end # mysql_database_user
@@ -133,8 +135,8 @@ end # .each
 mysql_database_user 'wwuser' do
   connection    connection_info
   password      secret['wwuser'] || 'missing_password'
-  database_name 'matrix_production'
   host          '%'
+  database_name 'matrix_production'
   privileges    ['SELECT']
   action        :grant
   only_if { secret['wwuser'] }

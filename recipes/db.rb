@@ -49,7 +49,7 @@ connection_info = {
   #   action :query
   #   only_if { secret['mysqladmin'] }
   # end
-  mysql_database_user 'mysqladmin' do
+  mysql_database_user "mysqladmin@#{domain}" do
     connection  connection_info
     username    'mysqladmin'
     host        domain
@@ -64,7 +64,7 @@ connection_info = {
 
 
   # grant privileges to 'insql' for internal, read/write access to The Matrix
-  mysql_database_user 'insql' do
+  mysql_database_user "insql@#{domain}" do
     connection    connection_info
     username      'insql'
     host          domain
@@ -87,7 +87,8 @@ node['rails_app']['stages'].each do |stage|
   end # mysql_database
 
   # grant privileges to <db_username> for Rails <stage> environment
-  mysql_database_user "#{stage}_#{stage.fetch('db_username')}" do
+  mysql_database_user "#{stage.fetch('name')}_" \
+    "#{stage.fetch('db_username')}@#{stage.fetch('db_host')}" do
     connection    connection_info
     username      stage.fetch('db_username')
     host          stage.fetch('db_host')

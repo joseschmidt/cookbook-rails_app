@@ -104,7 +104,8 @@ node['rails_app']['stages'].each do |stage|
   end # file
 
   # create rails database configuration file
-  template 'database.yml' do |t|
+  template "#{stage}: database.yml" do |t|
+    source    'database.yml.erb'
     path      "#{base}/shared/config/database.yml"
     owner     'jeeves'
     group     'jeeves'

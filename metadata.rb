@@ -1,4 +1,4 @@
-# coding: utf-8
+# encoding: utf-8
 name              'rails_app'
 version           '0.4.0'
 

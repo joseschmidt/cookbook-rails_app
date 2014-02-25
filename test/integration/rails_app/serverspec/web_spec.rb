@@ -300,8 +300,8 @@ describe 'rails_app::web' do
       expect(subject).to be_grouped_into('root')
     end # it
 
-    it 'is mode 440' do
-      expect(subject).to be_mode(440)
+    it 'is mode 644' do
+      expect(subject).to be_mode(644)
     end # it
 
     it 'includes expected path' do

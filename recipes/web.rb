@@ -130,6 +130,7 @@ include_recipe 'logrotate'
 # create configuration file in /etc/logrotate.d/
 logrotate_app 'var_www_apps' do
   cookbook    'logrotate'
+  template_mode '0644'
   path        '/var/www/apps/**/**/shared/log/*.log'
   frequency   'daily'
   options     %w(missingok compress delaycompress sharedscripts)

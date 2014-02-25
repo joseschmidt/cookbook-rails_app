@@ -68,7 +68,7 @@ describe 'rails_app::web' do
 
       describe 'yum::epel' do
         it 'includes recipe if platform family is rhel' do
-          if os?(:rhel)
+          if platform?(:rhel)
             expect(chef_run).to include_recipe(subject)
           else
             expect(chef_run).to_not include_recipe(subject)
@@ -91,7 +91,7 @@ describe 'rails_app::web' do
       end # %w(...).each
 
       it 'installs expected package' do
-        if os?(:rhel5)
+        if platform?(:rhel5)
           expect(chef_run).to install_package('python')
             .with_package_name('python26')
         else
@@ -102,7 +102,7 @@ describe 'rails_app::web' do
 
       describe '/usr/local/bin/python' do
         it 'creates link with expected owner, group' do
-          if os?(:rhel5)
+          if platform?(:rhel5)
             expect(chef_run).to create_link(subject)
               .with(:owner => 'root', :group => 'root')
           else

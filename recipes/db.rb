@@ -1,4 +1,4 @@
-# coding: utf-8
+# encoding: utf-8
 #
 # Cookbook Name:: rails_app
 # Recipe:: db

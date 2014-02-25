@@ -125,16 +125,14 @@ end # .each
 execute "chown -R jeeves:jeeves /var/www/apps/#{node['rails_app']['name']}"
 
 #------------------------------------------------------- configure logrotate.d
-include_recipe 'logrotate'
-
-# create configuration file in /etc/logrotate.d/
 logrotate_app 'var_www_apps' do
-  cookbook    'logrotate'
-  path        '/var/www/apps/**/**/shared/log/*.log'
-  frequency   'daily'
-  options     %w(missingok compress delaycompress sharedscripts)
-  rotate      30
-  postrotate  'touch /var/www/apps/**/**/current/tmp/restart.txt'
+  cookbook      'logrotate'
+  template_mode '0644'
+  path          '/var/www/apps/**/**/shared/log/*.log'
+  frequency     'daily'
+  options       %w(missingok compress delaycompress sharedscripts)
+  rotate        30
+  postrotate    'touch /var/www/apps/**/**/current/tmp/restart.txt'
 end # logrotate_app
 
 #----------------------------------------------------- configure github access

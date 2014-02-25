@@ -196,16 +196,10 @@ describe 'rails_app::web' do
         end # it
       end # describe
 
-      describe 'logrotate' do
-        it 'includes recipe' do
-          expect(chef_run).to include_recipe(subject)
-        end # it
-      end # describe
-
       describe '/etc/logrotate.d/var_www_apps' do
         it 'creates template with expected owner, group, mode' do
           expect(chef_run).to create_template(subject)
-            .with(:owner => 'root', :group => 'root', :mode => '0440')
+            .with(:owner => 'root', :group => 'root', :mode => '0644')
         end # it
 
         it 'renders file with expected path' do

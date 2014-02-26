@@ -59,13 +59,13 @@ describe 'rails_app::db' do
   end # let
 
   describe 'mysql::ruby' do
-    it 'includes recipe' do
+    it 'includes described recipe' do
       expect(chef_run).to include_recipe(subject)
     end # it
   end # describe
 
   describe 'chef-sugar' do
-    it 'includes recipe' do
+    it 'includes described recipe' do
       expect(chef_run).to include_recipe(subject)
     end # it
   end # describe

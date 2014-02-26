@@ -61,13 +61,13 @@ describe 'rails_app::web' do
       end # cached
 
       describe 'chef-sugar::default' do
-        it 'includes recipe' do
+        it 'includes described recipe' do
           expect(chef_run).to include_recipe(subject)
         end # it
       end # describe
 
       describe 'yum::epel' do
-        it 'includes recipe if platform family is rhel' do
+        it 'includes described recipe if platform family is rhel' do
           if platform?(:rhel)
             expect(chef_run).to include_recipe(subject)
           else
@@ -77,28 +77,30 @@ describe 'rails_app::web' do
       end # describe
 
       describe 'unixODBC-devel' do
-        it 'installs package' do
+        it 'installs described package' do
           expect(chef_run).to install_package(subject)
         end # it
       end # describe
 
       %w(freetds freetds-devel).each do |pkg|
         describe pkg do
-          it 'installs package' do
+          it 'installs described package' do
             expect(chef_run).to install_package(subject)
           end # it
         end # describe
       end # %w(...).each
 
-      it 'installs expected package' do
-        if platform?(:rhel5)
-          expect(chef_run).to install_package('python')
-            .with_package_name('python26')
-        else
-          expect(chef_run).to install_package('python')
-            .with_package_name('python')
-        end # if
-      end # it
+      describe 'python' do
+        it 'installs described package' do
+          if platform?(:rhel5)
+            expect(chef_run).to install_package(subject)
+              .with_package_name('python26')
+          else
+            expect(chef_run).to install_package(subject)
+              .with_package_name('python')
+          end # if
+        end # it
+      end # describe
 
       describe '/usr/local/bin/python' do
         it 'creates link with expected owner, group' do

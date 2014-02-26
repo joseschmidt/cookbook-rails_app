@@ -50,10 +50,10 @@ end # package
 # to use v2.6, provided /usr/local/bin comes before /usr/bin in $PATH
 # action :create allows it to repair missing link
 link '/usr/local/bin/python' do
-  to    '/usr/bin/python26'
-  owner 'root'
-  group 'root'
-  action :create
+  to      '/usr/bin/python26'
+  owner   'root'
+  group   'root'
+  action  :create
   only_if { platform_family?('rhel') && node['platform_version'].to_f < 6.0 }
 end # link
 
@@ -90,10 +90,10 @@ node['rails_app']['stages'].each do |stage|
 
   # ln -s /tmp /var/www/apps/<app>/<stage>/current
   link "#{base}/current" do
-    to    '/tmp'
-    owner 'jeeves'
-    group 'jeeves'
-    not_if { ::File.symlink?("#{base}/current") }
+    to      '/tmp'
+    owner   'jeeves'
+    group   'jeeves'
+    not_if  { ::File.symlink?("#{base}/current") }
   end # link
 
   file "#{base}/current/REVISION" do

@@ -17,7 +17,7 @@ describe 'rails_app::web' do
     { :platform => 'ubuntu', :version => '12.04' }
   ].each do |i|
     context "#{i[:platform]}/#{i[:version]}" do
-      let(:chef_run) do
+      cached(:chef_run) do
         ChefSpec::Runner.new(i) do |node|
           # create a new environment
           env = Chef::Environment.new
@@ -58,7 +58,7 @@ describe 'rails_app::web' do
           # # required for build-essential cookbook on travis-ci
           # node.set['platform_family'] = 'rhel'
         end.converge(described_recipe)
-      end # let
+      end # cached
 
       describe 'chef-sugar::default' do
         it 'includes recipe' do

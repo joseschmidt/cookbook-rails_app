@@ -285,7 +285,7 @@ describe 'rails_app::web' do
   end # describe
 
   describe file('/etc/logrotate.d/var_www_apps') do
-    it 'is file' do
+    it 'is a file' do
       expect(subject).to be_file
     end # it
 

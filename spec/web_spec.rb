@@ -66,7 +66,7 @@ describe 'rails_app::web' do
         end # it
       end # describe
 
-      describe 'yum::epel' do
+      describe 'yum-epel' do
         it 'includes described recipe if platform family is rhel' do
           if platform?(:rhel)
             expect(chef_run).to include_recipe(subject)

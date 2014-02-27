@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'serverspec'
+require 'platform_helpers'
 
 include Serverspec::Helper::Exec
 include Serverspec::Helper::DetectOS

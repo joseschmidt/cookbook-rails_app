@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe 'rails_app::web' do
-  describe yumrepo('epel') do
+  describe yumrepo('epel'), :if => platform?(:rhel) do
     it 'exists' do
       expect(subject).to exist
     end # it
@@ -30,38 +30,35 @@ describe 'rails_app::web' do
     end # it
   end # describe
 
-  os = backend(Serverspec::Commands::Base).check_os
-  if os[:family] == 'RedHat' && os[:release].to_f < 6.0
-    describe package('python26') do
-      it 'is installed with version 2.6' do
-        expect(subject).to be_installed.with_version('2.6')
-      end # it
-    end # describe
+  describe package('python26'), :if => platform?(:rhel5) do
+    it 'is installed with version 2.6' do
+      expect(subject).to be_installed.with_version('2.6')
+    end # it
+  end # describe
 
-    describe file('/usr/local/bin/python') do
-      it 'is mode 777' do
-        expect(subject).to be_mode('777')
-      end # it
+  describe package('python'), :unless => platform?(:rhel5) do
+    it 'is installed with version 2.6' do
+      expect(subject).to be_installed.with_version('2.6')
+    end # it
+  end # describe
 
-      it 'is owned by root' do
-        expect(subject).to be_owned_by('root')
-      end # it
+  describe file('/usr/local/bin/python'), :if => platform?(:rhel5) do
+    it 'is mode 777' do
+      expect(subject).to be_mode('777')
+    end # it
 
-      it 'is grouped into root' do
-        expect(subject).to be_grouped_into('root')
-      end # it
+    it 'is owned by root' do
+      expect(subject).to be_owned_by('root')
+    end # it
 
-      it 'is linked to python26 binary' do
-        expect(subject).to be_linked_to('/usr/bin/python26')
-      end # it
-    end # describe
-  else
-    describe package('python') do
-      it 'is installed with version 2.6' do
-        expect(subject).to be_installed.with_version('2.6')
-      end # it
-    end # describe
-  end # if
+    it 'is grouped into root' do
+      expect(subject).to be_grouped_into('root')
+    end # it
+
+    it 'is linked to python26 binary' do
+      expect(subject).to be_linked_to('/usr/bin/python26')
+    end # it
+  end # describe
 
   describe file('/var/www/html/neo') do
     it 'is mode 777' do

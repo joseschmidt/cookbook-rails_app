@@ -1,4 +1,5 @@
-# Contributing
+CONTRIBUTING
+============
 
 1. Fork the repository on GitHub
 2. Create your feature branch (`git checkout -b my-new-feature`)

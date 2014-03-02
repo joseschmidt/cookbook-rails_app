@@ -11,13 +11,13 @@ Requirements
 ### Cookbooks
 The following cookbooks are direct dependencies because they're used for common "default" functionality.
 
-- `chef-sugar`
-- `cron`
-- `database`
-- `logrotate`
-- `mysql`
-- `rvm`
-- `yum`
+- [`chef-sugar`](https://github.com/sethvargo/chef-sugar)
+- [`cron`](https://github.com/opscode-cookbooks/cron)
+- [`database`](https://github.com/opscode-cookbooks/database)
+- [`logrotate`](http://github.com/opscode-cookbooks/logrotate)
+- [`mysql`](https://github.com/opscode-cookbooks/mysql)
+- [`rvm`](https://github.com/fnichol/chef-rvm)
+- [`yum-epel`](https://github.com/opscode-cookbooks/yum-epel)
 
 ### Platforms
 The following platforms are supported and tested under Test Kitchen:

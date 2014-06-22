@@ -73,7 +73,7 @@ node['rails_app']['stages'].each do |stage|
 
   # ln -s ../apps/<app>/<stage>/current/public /var/www/html/<codename>
   link "/var/www/html/#{stage['codename']}" do
-    to    "../apps/#{node['rails_app']['name']}/#{stage['name']}/" +
+    to    "../apps/#{node['rails_app']['name']}/#{stage['name']}/" \
       'current/public'
     owner 'root'
     group 'root'

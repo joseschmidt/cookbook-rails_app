@@ -48,7 +48,7 @@ describe 'rails_app::db' do
 
     it 'returns expected GRANT SELECT statement' do
       expect(subject.stdout).to include(
-        "GRANT SELECT, INSERT, UPDATE ON `matrix_production`.* " \
+        'GRANT SELECT, INSERT, UPDATE ON `matrix_production`.* ' \
         "TO 'insql'@'localhost'"
       )
     end # it
@@ -68,7 +68,7 @@ describe 'rails_app::db' do
 
     it 'returns expected GRANT SELECT statement' do
       expect(subject.stdout).to include(
-        "GRANT SELECT, INSERT, UPDATE ON `matrix_production`.* " \
+        'GRANT SELECT, INSERT, UPDATE ON `matrix_production`.* ' \
         "TO 'insql'@'%'"
       )
     end # it
@@ -121,7 +121,7 @@ describe 'rails_app::db' do
 
     it 'returns expected GRANT ALL PRIVILEGES statement' do
       expect(subject.stdout).to include(
-        "GRANT ALL PRIVILEGES ON `matrix_production`.* " \
+        'GRANT ALL PRIVILEGES ON `matrix_production`.* ' \
         "TO 'matrix'@'localhost'"
       )
     end # it
@@ -174,7 +174,7 @@ describe 'rails_app::db' do
 
     it 'returns expected GRANT ALL PRIVILEGES statement' do
       expect(subject.stdout).to include(
-        "GRANT ALL PRIVILEGES ON `matrix_staging`.* " \
+        'GRANT ALL PRIVILEGES ON `matrix_staging`.* ' \
         "TO 'matrix_staging'@'localhost'"
       )
     end # it

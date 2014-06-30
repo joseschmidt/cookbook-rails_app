@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe 'rails_app::db' do
   before do
-    Chef::Sugar::DataBag.stub(:encrypted_data_bag_item).and_return(
+    allow(Chef::Sugar::DataBag).to receive(:encrypted_data_bag_item).and_return(
       'insql' => 'insql_password',
       'matrix' => 'matrix_password',
       'matrix_staging' => 'matrix_staging_password',
@@ -24,10 +24,10 @@ describe 'rails_app::db' do
       env.name 'qa'
 
       # stub the node to return this environment
-      node.stub(:chef_environment).and_return(env.name)
+      allow(node).to receive(:chef_environment).and_return(env.name)
 
       # stub any calls to Environment.load to return this environment
-      Chef::Environment.stub(:load).and_return(env)
+      allow(Chef::Environment).to receive(:load).and_return(env)
 
       # override cookbook attributes
       node.set['rails_app']['stages'] = [

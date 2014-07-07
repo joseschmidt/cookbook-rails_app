@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe 'rails_app::web' do
   before do
-    Chef::Sugar::DataBag.stub(:encrypted_data_bag_item).and_return(
+    allow(Chef::Sugar::DataBag).to receive(:encrypted_data_bag_item).and_return(
       'stage1_db_username' => 'stage1_db_password',
       'stage2_db_username' => 'stage2_db_password'
     )
@@ -24,10 +24,10 @@ describe 'rails_app::web' do
           env.name 'qa'
 
           # stub the node to return this environment
-          node.stub(:chef_environment).and_return(env.name)
+          allow(node).to receive(:chef_environment).and_return(env.name)
 
           # stub any calls to Environment.load to return this environment
-          Chef::Environment.stub(:load).and_return(env)
+          allow(Chef::Environment).to receive(:load).and_return(env)
 
           # override cookbook attributes
           node.set['file']['header'] = 'node.file.header'

@@ -11,7 +11,7 @@ group :test do
   gem 'chef-sugar', '~> 2.0.0'
   gem 'chefspec', '~> 4.0.0'
   gem 'foodcritic', '~> 4.0.0'
-  gem 'rubocop', '~> 0.23.0'
+  gem 'rubocop', '~> 0.24.1'
 end # group
 
 group :integration do

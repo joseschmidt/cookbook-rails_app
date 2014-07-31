@@ -4,8 +4,8 @@ require 'spec_helper'
 describe 'rails_app::db' do
   # verify privileges for user 'mysqladmin@localhost'
   cmd = []
-  cmd << %q(mysql --user=mysqladmin --password=mysqladmin_password)
-  cmd << %q(--execute="show grants for mysqladmin@localhost;")
+  cmd << 'mysql --user=mysqladmin --password=mysqladmin_password'
+  cmd << '--execute="show grants for mysqladmin@localhost;"'
   describe command(cmd.join(' ')) do
     it 'returns exit status 0' do
       expect(subject).to return_exit_status(0)
@@ -33,8 +33,8 @@ describe 'rails_app::db' do
 
   # verify privileges for user 'insql@localhost'
   cmd = []
-  cmd << %q(mysql --user=mysqladmin --password=mysqladmin_password)
-  cmd << %q(--execute="show grants for insql@localhost;")
+  cmd << 'mysql --user=mysqladmin --password=mysqladmin_password'
+  cmd << '--execute="show grants for insql@localhost;"'
   describe command(cmd.join(' ')) do
     it 'returns exit status 0' do
       expect(subject).to return_exit_status(0)
@@ -76,8 +76,8 @@ describe 'rails_app::db' do
 
   # verify database encoding for database 'matrix_production'
   cmd = []
-  cmd << %q(mysql --user=mysqladmin --password=mysqladmin_password)
-  cmd << %q(--database=matrix_production)
+  cmd << 'mysql --user=mysqladmin --password=mysqladmin_password'
+  cmd << '--database=matrix_production'
   cmd << %q(--execute="show variables like 'character_set_database';")
   describe command(cmd.join(' ')) do
     it 'returns exit status 0' do
@@ -91,8 +91,8 @@ describe 'rails_app::db' do
 
   # verify database collation for database 'matrix_production'
   cmd = []
-  cmd << %q(mysql --user=mysqladmin --password=mysqladmin_password)
-  cmd << %q(--database=matrix_production)
+  cmd << 'mysql --user=mysqladmin --password=mysqladmin_password'
+  cmd << '--database=matrix_production'
   cmd << %q(--execute="show variables like 'collation_database';")
   describe command(cmd.join(' ')) do
     it 'returns exit status 0' do
@@ -106,8 +106,8 @@ describe 'rails_app::db' do
 
   # verify privileges for user 'matrix@localhost'
   cmd = []
-  cmd << %q(mysql --user=mysqladmin --password=mysqladmin_password)
-  cmd << %q(--execute="show grants for matrix@localhost;")
+  cmd << 'mysql --user=mysqladmin --password=mysqladmin_password'
+  cmd << '--execute="show grants for matrix@localhost;"'
   describe command(cmd.join(' ')) do
     it 'returns exit status 0' do
       expect(subject).to return_exit_status(0)
@@ -129,8 +129,8 @@ describe 'rails_app::db' do
 
   # verify database encoding for database 'matrix_staging'
   cmd = []
-  cmd << %q(mysql --user=mysqladmin --password=mysqladmin_password)
-  cmd << %q(--database=matrix_staging)
+  cmd << 'mysql --user=mysqladmin --password=mysqladmin_password'
+  cmd << '--database=matrix_staging'
   cmd << %q(--execute="show variables like 'character_set_database';")
   describe command(cmd.join(' ')) do
     it 'returns exit status 0' do
@@ -144,8 +144,8 @@ describe 'rails_app::db' do
 
   # verify database collation for database 'matrix_staging'
   cmd = []
-  cmd << %q(mysql --user=mysqladmin --password=mysqladmin_password)
-  cmd << %q(--database=matrix_staging)
+  cmd << 'mysql --user=mysqladmin --password=mysqladmin_password'
+  cmd << '--database=matrix_staging'
   cmd << %q(--execute="show variables like 'collation_database';")
   describe command(cmd.join(' ')) do
     it 'returns exit status 0' do
@@ -159,8 +159,8 @@ describe 'rails_app::db' do
 
   # verify privileges for user 'matrix_staging@localhost'
   cmd = []
-  cmd << %q(mysql --user=mysqladmin --password=mysqladmin_password)
-  cmd << %q(--execute="show grants for matrix_staging@localhost;")
+  cmd << 'mysql --user=mysqladmin --password=mysqladmin_password'
+  cmd << '--execute="show grants for matrix_staging@localhost;"'
   describe command(cmd.join(' ')) do
     it 'returns exit status 0' do
       expect(subject).to return_exit_status(0)
@@ -182,7 +182,7 @@ describe 'rails_app::db' do
 
   # verify privileges for user 'wwuser@%'
   cmd = []
-  cmd << %q(mysql --user=mysqladmin --password=mysqladmin_password)
+  cmd << 'mysql --user=mysqladmin --password=mysqladmin_password'
   cmd << %q(--execute="show grants for wwuser@'%';")
   describe command(cmd.join(' ')) do
     it 'returns exit status 0' do
@@ -204,8 +204,8 @@ describe 'rails_app::db' do
 
   # ensure test database does not exist
   cmd = []
-  cmd << %q(mysql --user=mysqladmin --password=mysqladmin_password)
-  cmd << %q(--execute="use test;")
+  cmd << 'mysql --user=mysqladmin --password=mysqladmin_password'
+  cmd << '--execute="use test;"'
   describe command(cmd.join(' ')) do
     it 'returns exit status 1' do
       expect(subject).to return_exit_status(1)

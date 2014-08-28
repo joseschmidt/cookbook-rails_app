@@ -8,8 +8,8 @@ end # group
 
 group :test do
   gem 'berkshelf', '~> 3.1.1'
-  gem 'chef-sugar', '~> 2.0.0'
-  gem 'chefspec', '~> 4.0.0'
+  gem 'chef-sugar', '~> 2.2.0'
+  gem 'chefspec', '~> 4.0.2'
   gem 'foodcritic', '~> 4.0.0'
   gem 'rubocop', '~> 0.24.1'
 end # group
